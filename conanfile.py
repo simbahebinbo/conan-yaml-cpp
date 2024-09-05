@@ -32,9 +32,9 @@ class PackageConan(ConanFile):
         git.checkout(branch_name)
 
     def build(self):
-        build_script_folder=os.path.join(self.source_folder)
-        self.run(f"cmake {build_script_folder}")
-        self.run("cmake --build .")
+        cmake = CMake(self)
+        cmake.configure()
+        cmake.build()
 
     def package(self):
         cmake = CMake(self)
